@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/title_visibility"
+        android:title="Видимость заголовка"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/subtitle_visibility"
+        android:title="Видимость подзаголовка"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/navigation_visibility"
+        android:title="Видимость стрелки"
+        app:showAsAction="never" />
+</menu>
