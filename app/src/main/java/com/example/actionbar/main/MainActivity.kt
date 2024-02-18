@@ -4,30 +4,23 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.TextView
-import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
+import androidx.appcompat.widget.Toolbar
 import com.example.actionbar.R
 
 class MainActivity : AppCompatActivity() {
-
-    private var actionBar: ActionBar? = null
-    private var isBackVisible = true
-    private var namesText: TextView? = null
     private val data = listOf("Андрей", "Иван", "Ольга", "Наталья")
+    private var isBackVisible = true
+
+    private var toolbar: Toolbar? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        actionBar = supportActionBar
-
-        //Начальное состояние
-        actionBar?.title = "Заголовок"
-        actionBar?.subtitle = "Подзаголовок"
-        actionBar?.setDisplayHomeAsUpEnabled(isBackVisible)
-
-        namesText = findViewById(R.id.names_TextView)
-        showNames(data)
+        toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar) //Включение поддержки ActionBar
+        supportActionBar?.setDisplayHomeAsUpEnabled(true) //Включение отображения кнопки назад
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -42,7 +35,7 @@ class MainActivity : AppCompatActivity() {
 
             //Функция вызывается при изменении текста в строке поиска
             override fun onQueryTextChange(newText: String?): Boolean {
-                showNames(data.filter { it.contains(newText.toString()) })
+//                showNames(data.filter { it.contains(newText.toString()) })
                 return true
             }
         })
@@ -69,9 +62,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun showNames(names: List<String>){
-        namesText?.text = names.joinToString()
-    }
+//    fun showNames(names: List<String>){
+//        namesText?.text = names.joinToString()
+//    }
 
 
 }
