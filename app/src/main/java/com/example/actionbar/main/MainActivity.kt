@@ -1,70 +1,41 @@
 package com.example.actionbar.main
 
+
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
-import android.widget.TextView
+import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.SearchView
-import androidx.appcompat.widget.Toolbar
 import com.example.actionbar.R
 
 class MainActivity : AppCompatActivity() {
-    private val data = listOf("Андрей", "Иван", "Ольга", "Наталья")
-    private var isBackVisible = true
-
     private var toolbar: Toolbar? = null
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         toolbar = findViewById(R.id.toolbar)
-        setSupportActionBar(toolbar) //Включение поддержки ActionBar
-        supportActionBar?.setDisplayHomeAsUpEnabled(true) //Включение отображения кнопки назад
-    }
+        setActionBar(toolbar) // Используй setActionBar для android.widget.Toolbar
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_main, menu)
-        val searchItem = menu.findItem(R.id.action_search)
-        val searchView = searchItem.actionView as SearchView
+        val upArrow = resources.getDrawable(R.drawable.baseline_airline_stops_24, null)
+        actionBar?.setHomeAsUpIndicator(upArrow)
 
-        // Обработчик событий для SearchView
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            //Функция вызывается при вводе запроса
-            override fun onQueryTextSubmit(query: String?): Boolean  = false
+        actionBar?.setDisplayHomeAsUpEnabled(true) // Показывает кнопку назад
+        actionBar?.setHomeButtonEnabled(true) // Включает кнопку назад
+        actionBar?.title = "Заголовок" // Устанавливает заголовок
+        actionBar?.subtitle = "Tatata"
 
-            //Функция вызывается при изменении текста в строке поиска
-            override fun onQueryTextChange(newText: String?): Boolean {
-//                showNames(data.filter { it.contains(newText.toString()) })
-                return true
+        toolbar?.inflateMenu(R.menu.menu_main)
+        toolbar?.setOnMenuItemClickListener { item ->
+            when (item.itemId) {
+                R.id.title_visibility -> {
+                    //Обработка нажатия на пункт меню
+                    true
+                }
+                else -> false
             }
-        })
-        return true
-    }
+        }
 
-    //Обработка нажатий в меню
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.title_visibility -> {
-                actionBar?.title = if (actionBar?.title?.isNotEmpty() == true) "" else "Заголовок"
-                true
-            }
-            R.id.subtitle_visibility -> {
-                actionBar?.subtitle = if (actionBar?.subtitle?.isNotEmpty() == true) "" else "Подзаголовок"
-                true
-            }
-            R.id.navigation_visibility -> {
-                isBackVisible = !isBackVisible
-                actionBar?.setDisplayHomeAsUpEnabled(isBackVisible)
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
+        toolbar?.setNavigationOnClickListener {
+            onBackPressed() // Обрабатывает нажатие кнопки назад
         }
     }
-
-//    fun showNames(names: List<String>){
-//        namesText?.text = names.joinToString()
-//    }
-
-
 }
