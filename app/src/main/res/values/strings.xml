@@ -1,3 +1,14 @@
 <resources>
-    <string name="app_name">ActionBar</string>
+    <string name="app_name">CoordinatorLayoutProject</string>
+    <string name="title">Евгений Онегин</string>
+    <string name="epigraph">И жить торопится,\n и чувствовать спешит.\nКн. Вяземский.</string>
+    <string name="novel">
+Глава первая.\n
+\n
+I\n
+\n
+«Мой дядя самых честных правил,\n
+Когда не в шутку занемог,\n
+…
+   </string>
 </resources>
